@@ -9,7 +9,6 @@ def start(game):
         print("Die Sonne scheint steil von oben auf dich herab. Es scheint wohl um die Mittagszeit zu sein.")
         print("Du kannst dich an nichts erinnern. Was ist in der letzten Nacht passiert? Nur ein blaues Licht scheint dir als Erinnerung geblieben zu sein.")
         print("Als du in deine Tasche greifst, ziehst du einen Ausweis heraus.")
-        print("Auf diesem Dokument liest du 'Vereinigte Europäische Föderation'. Neben dem Schriftzug prangt das Logo der New World Order.")
         game.player = input("Du siehst auf das Foto und erkennst dein Gesicht. Daneben steht dein Name: ")
         print(f"Du denkst dir nur 'Guten Morgen, {game.player}' und siehst dich weiter um.\n")
         ausweis = inventar.Item("Personalausweis", "Dein Personalausweis mit einem Foto.")
