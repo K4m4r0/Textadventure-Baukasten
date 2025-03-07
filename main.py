@@ -102,7 +102,7 @@ class Game:
             self.current_location(self, verb, target, preposition)
 
         else:
-            print("Befehl nicht erkannt.")
+            print("Das hat keinen Effekt.")
 
     def play(self):
         while True:
