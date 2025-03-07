@@ -35,10 +35,10 @@ def location_wald(game, verb=None, target=None, preposition=None):
     elif verb == "gehe" and target == "ebene":
         game.current_location = location_registry["location_ebene"]
     elif verb == "rede" and target == "oger" and game.inventar_spieler.has_item("Klack") and game.inventar_spieler.has_item("Geheimer Schlüssel"):
-        print(f"Hallo Klack.")
+        print(f"{game.player}: Hallo Klack.")
         print(f"Klack: Hallo {game.player}.")
     elif verb == "rede" and target == "oger" and game.inventar_spieler.has_item("Klack"):
-        print(f"Hallo Klack.")
+        print(f"{game.player}: Hallo Klack.")
         print(f"Klack: Hallo {game.player}, was kann ich für dich tun?")
         print("1. Nichts, vielen Dank.")
         print("2. Weißt du, wie man durch das große Tor kommt?")
@@ -47,6 +47,7 @@ def location_wald(game, verb=None, target=None, preposition=None):
             print(f"{game.player}: Nichts, vielen Dank.")
             print("Klack: Ok, bis bald.")
         elif auswahl == "2":
+            print(f"{game.player}: Weißt du, wie man durch das große Tor kommt?")
             print("Klack: „Natürlich. Hier, nimm diesen Schlüssel. Damit kannst du das Tor öffnen.“")
             geheimer_schlüssel = inventar.Item("Geheimer Schlüssel", "Klack sagte, dass du damit das Tor öffnen kannst.", visible=True)
             game.inventar_spieler.add_item(geheimer_schlüssel)
@@ -54,7 +55,7 @@ def location_wald(game, verb=None, target=None, preposition=None):
         else:
             print("Eingabe nicht erkannt.\n")
     elif verb == "rede" and target == "oger":
-        print(f"Hallo, mein Name ist {game.player}, wer bist du?")
+        print(f"{game.player}: Hallo, mein Name ist {game.player}, wer bist du?")
         print("Oger: Mein Name ist Klack, was kann ich für dich tun?")
         klack = inventar.Item("Klack", "Der Spieler hat mit Klack gesprochen", visible=False)
         game.inventar_spieler.add_item(klack)
@@ -65,6 +66,7 @@ def location_wald(game, verb=None, target=None, preposition=None):
             print(f"{game.player}: Nichts, vielen Dank.")
             print("Klack: Ok, bis bald.")
         elif auswahl == "2":
+            print(f"{game.player}: Weißt du, wie man durch das große Tor kommt?")
             print("Klack: Natürlich. Hier, nimm diesen Schlüssel. Damit kannst du das Tor öffnen.")
             geheimer_schlüssel = inventar.Item("Geheimer Schlüssel", "Klack sagte, dass du damit das Tor öffnen kannst.", visible=True)
             game.inventar_spieler.add_item(geheimer_schlüssel)
