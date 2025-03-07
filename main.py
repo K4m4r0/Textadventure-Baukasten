@@ -27,8 +27,8 @@ class Game:
         self.current_location = self.menu
 
         # Testitem unsichtbarer Schlüssel
-        geheimer_schlüssel = inventar.Item("Geheimer Schlüssel", "Ein Schlüssel, den niemand sehen sollte.", visible=False)
-        self.inventar_spieler.add_item(geheimer_schlüssel)
+        #geheimer_schlüssel = inventar.Item("Geheimer Schlüssel", "Ein Schlüssel, den niemand sehen sollte.", visible=False)
+        #self.inventar_spieler.add_item(geheimer_schlüssel)
 
     def parse_input(self, user_input):
         words = user_input.lower().strip().split()
@@ -60,6 +60,10 @@ class Game:
             preposition = "mit"
             second_target = words[3]
             return verb, target, f"{preposition} {second_target}"
+        if len(words) == 3 and words[1] == "mit":
+            verb = words[0]
+            target = words[2]
+            return verb, target, None
 
         return None, None, None
 
@@ -113,3 +117,4 @@ class Game:
 if __name__ == "__main__":
     game = Game()
     game.play()
+
