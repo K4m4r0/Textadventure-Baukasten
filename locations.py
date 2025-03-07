@@ -93,7 +93,7 @@ def tor(game, verb=None, target=None, preposition=None):
     else:
         print("Befehl nicht erkannt.")
 
-# Für jede neue Location in locations.py muss hier ein Eintrag erstellt werden. locations.[Name der Locations Funktion]
+# Für jede neue Location in locations.py muss hier ein Eintrag erstellt werden.
 
 location_registry = {
     "location_ebene": location_ebene,
