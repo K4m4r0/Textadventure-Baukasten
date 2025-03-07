@@ -26,9 +26,9 @@ class Game:
         # Setze die Startlocation
         self.current_location = self.menu
 
-        # Testitem unsichtbarer Schlüssel
-        #geheimer_schlüssel = inventar.Item("Geheimer Schlüssel", "Ein Schlüssel, den niemand sehen sollte.", visible=False)
-        #self.inventar_spieler.add_item(geheimer_schlüssel)
+        # Testitem unsichtbares Item, wird direkt zu Spielbeginn in das Inventar des Spielers gelegt
+        #unsichtbares_item = inventar.Item("Unsichtbares Item", "Ein Item, das niemand sehen sollte.", visible=False)
+        #self.inventar_spieler.add_item(unsichtbares_item)
 
     def parse_input(self, user_input):
         words = user_input.lower().strip().split()
@@ -69,7 +69,7 @@ class Game:
 
     def execute_command(self, verb, target, preposition):
         if verb == "hilfe":
-            print("Dies sind einige gültige Befehle: 'gehe zu [Ort]', 'untersuche [Ziel]', 'benutze [Objekt] mit [Ziel]', 'speichern', 'laden', 'ende'.")
+            print("Dies sind einige gültige Befehle: 'gehe zu [Ort]', 'untersuche [Ziel]', 'benutze [Objekt] mit [Ziel]', 'rede mit [Ziel]', 'speichern', 'laden', 'ende'.")
 
         elif verb == "inventar":
             print(f"Dein Inventar enthält:\n {self.inventar_spieler}\n")
