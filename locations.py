@@ -26,7 +26,7 @@ def location_ebene(game, verb=None, target=None, preposition=None):
     elif verb == "gehe" and target == "tor" or target == "mauer":
         game.current_location = location_registry["tor"]
     else:
-        print("Befehl nicht erkannt.")
+        print("Das hat keinen Effekt.")
 
 
 def location_wald(game, verb=None, target=None, preposition=None):
@@ -78,7 +78,7 @@ def location_wald(game, verb=None, target=None, preposition=None):
     elif verb == "untersuche" and target == "oger":
         print("Ein großer, grüner Oger, der unerwartet freundlich aussieht.")
     else:
-        print("Befehl nicht erkannt.")
+        print("Das hat keinen Effekt.")
 
 
 def tor(game, verb=None, target=None, preposition=None):
@@ -93,9 +93,9 @@ def tor(game, verb=None, target=None, preposition=None):
     elif verb == "untersuche" and target == "tor":
             print("Ein großes, altes Tor. Es hat eine Öffnung für einen Schlüssel in der Mitte.")
     else:
-        print("Befehl nicht erkannt.")
+        print("Das hat keinen Effekt.")
 
-# Für jede neue Location in locations.py muss hier ein Eintrag erstellt werden.
+# Für jede neue Location in locations.py muss hier ein Eintrag erstellt werden. locations.[Name der Locations Funktion]
 
 location_registry = {
     "location_ebene": location_ebene,
