@@ -35,9 +35,12 @@ def location_wald(game, verb=None, target=None, preposition=None):
         print("Du bist in einem düsteren Wald. Hinter dir ist eine strahlende Ebene. Am Eingang zum Wald steht ein Oger.")
     elif verb == "gehe" and target == "ebene":
         game.current_location = location_registry["location_ebene"]
-    elif verb == "rede" and target == "oger":
-        print(f"Hallo, mein Name ist {game.player}, wer bist du?")
-        print("Oger: Mein Name ist Klack, was kann ich für dich tun?")
+    elif verb == "rede" and target == "oger" and game.inventar_spieler.has_item("Klack") and game.inventar_spieler.has_item("Geheimer Schlüssel"):
+        print(f"Hallo Klack.")
+        print(f"Klack: Hallo {game.player}.")
+    elif verb == "rede" and target == "oger" and game.inventar_spieler.has_item("Klack"):
+        print(f"Hallo Klack.")
+        print(f"Klack: Hallo {game.player}, was kann ich für dich tun?")
         print("1. Nichts, vielen Dank.")
         print("2. Weißt du, wie man durch das große Tor kommt?")
         auswahl = input("Bitte die gewünschte Zahl eingeben: ")
@@ -46,6 +49,24 @@ def location_wald(game, verb=None, target=None, preposition=None):
             print("Klack: Ok, bis bald.")
         elif auswahl == "2":
             print("Klack: „Natürlich. Hier, nimm diesen Schlüssel. Damit kannst du das Tor öffnen.“")
+            geheimer_schlüssel = inventar.Item("Geheimer Schlüssel", "Klack sagte, dass du damit das Tor öffnen kannst.", visible=True)
+            game.inventar_spieler.add_item(geheimer_schlüssel)
+            print(f"{game.player}: Danke für deine Hilfe!")
+        else:
+            print("Eingabe nicht erkannt.\n")
+    elif verb == "rede" and target == "oger":
+        print(f"Hallo, mein Name ist {game.player}, wer bist du?")
+        print("Oger: Mein Name ist Klack, was kann ich für dich tun?")
+        klack = inventar.Item("Klack", "Der Spieler hat mit Klack gesprochen", visible=False)
+        game.inventar_spieler.add_item(klack)
+        print("1. Nichts, vielen Dank.")
+        print("2. Weißt du, wie man durch das große Tor kommt?")
+        auswahl = input("Bitte die gewünschte Zahl eingeben: ")
+        if auswahl == "1":
+            print(f"{game.player}: Nichts, vielen Dank.")
+            print("Klack: Ok, bis bald.")
+        elif auswahl == "2":
+            print("Klack: Natürlich. Hier, nimm diesen Schlüssel. Damit kannst du das Tor öffnen.")
             geheimer_schlüssel = inventar.Item("Geheimer Schlüssel", "Klack sagte, dass du damit das Tor öffnen kannst.", visible=True)
             game.inventar_spieler.add_item(geheimer_schlüssel)
             print(f"{game.player}: Danke für deine Hilfe!")
@@ -82,4 +103,3 @@ location_registry = {
     "tor": tor
 
 }
-
