@@ -5,7 +5,13 @@ from locations import location_registry
 
 
 def menu(game, verb=None):
-
+    print("             _                 _                   ")
+    print("    /\      | |               | |                  ")
+    print("   /  \   __| |_   _____ _ __ | |_ _   _ _ __ ___  ")
+    print("  / /\ \ / _` \ \ / / _ \ '_ \| __| | | | '__/ _ \ ")
+    print(" / ____ \ (_| |\ V /  __/ | | | |_| |_| | | |  __/ ")
+    print("/_/    \_\__,_| \_/ \___|_| |_|\__|\__,_|_|  \___| \n")
+                                                  
     print("\n\nHerzlich willkommen. Was möchtest du tun?")
     print("1. Neues Spiel")
     print("2. Laden")
