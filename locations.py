@@ -18,7 +18,7 @@ def start(game):
         print("Du bist in einem düsteren Wald. Hinter dir ist eine strahlende Ebene. Am Eingang zum Wald steht ein Oger.")
 
 
-def location_ebene(game, verb=None, target=None, preposition=None):
+def location_ebene(game, verb=None, target=None, preposition=None, second_target=None):
     if verb is None:
         print("Du befindest dich in einer weiten Ebene. Vor dir ist ein Wald. Rechts neben dir ist eine Mauer mit einem Tor.")
     elif verb == "gehe" and target == "wald":
@@ -29,7 +29,7 @@ def location_ebene(game, verb=None, target=None, preposition=None):
         print("Das hat keinen Effekt.")
 
 
-def location_wald(game, verb=None, target=None, preposition=None):
+def location_wald(game, verb=None, target=None, preposition=None, second_target=None):
     if verb is None:
         print("Du bist in einem düsteren Wald. Hinter dir ist eine strahlende Ebene. Am Eingang zum Wald steht ein Oger.")
     elif verb == "gehe" and target == "ebene":
@@ -81,7 +81,7 @@ def location_wald(game, verb=None, target=None, preposition=None):
         print("Das hat keinen Effekt.")
 
 
-def tor(game, verb=None, target=None, preposition=None):
+def tor(game, verb=None, target=None, preposition=None, second_target=None):
     if verb is None and game.inventar_spieler.has_item("Geheimer Schlüssel"): # Hier wird kontrolliert, ob ein Spieler ein gewisses Item im Inventar hat, um weiter zukommen. hat der Spieler das Item im Inventar, so erhält er einen anderen Text und andere Auswahlmöglichkeiten. Wichtig: name des Gegenstandes muss der aktuelle Name sein, nicht der Name der Variablen.
         print("Mit deinem Schlüssel öffnest du die schwere Tür und kannst passieren. Vor dir liegt ein Wald. Hinter dir erstreckt sich eine Ebene.")
     elif verb == "gehe" and target == "wald" and game.inventar_spieler.has_item("Geheimer Schlüssel"): # Der andere Weg muss ebenfalls mit der Bedingung des Gegenastandes verknüpft sein.
