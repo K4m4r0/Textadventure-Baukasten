@@ -1,6 +1,6 @@
 # main.py
 
-from menu import menu  # Import der menu-Funktion aus der neuen Datei
+from menu import menu  
 import inventar
 from savegame import save_game, load_game
 from locations import location_registry
@@ -27,49 +27,56 @@ class Game:
         self.current_location = self.menu
 
         # Testitem unsichtbares Item, wird direkt zu Spielbeginn in das Inventar des Spielers gelegt
-        #unsichtbares_item = inventar.Item("Unsichtbares Item", "Ein Item, das niemand sehen sollte.", visible=False)
-        #self.inventar_spieler.add_item(unsichtbares_item)
+        # unsichtbares_item = inventar.Item("Unsichtbares Item", "Ein Item, das niemand sehen sollte.", visible=False)
+        # self.inventar_spieler.add_item(unsichtbares_item)
 
     def parse_input(self, user_input):
         words = user_input.lower().strip().split()
 
         if "inventar" in words:
-            return "inventar", None, None
+            return "inventar", None, None, None
         if "hilfe" in words:
-            return "hilfe", None, None
+            return "hilfe", None, None, None
         if "speichern" in words:
-            return "speichern", None, None
+            return "speichern", None, None, None
         if "laden" in words:
-            return "laden", None, None
+            return "laden", None, None, None
         if "ende" in words:
-            return "ende", None, None
+            return "ende", None, None, None
         if "name" in words:
-            return "name", None, None
+            return "name", None, None, None
 
-        if len(words) == 2:
-            verb = words[0]
-            target = words[1]
-            return verb, target, None
-        if len(words) == 3 and words[1] == "zu":
-            verb = words[0]
-            target = words[2]
-            return verb, target, None
+        # für Befehle wie: "benutze [object] mit [target]"
         if len(words) == 4 and words[2] == "mit":
             verb = words[0]
             target = words[1]
-            preposition = "mit"
+            preposition = words[2]
             second_target = words[3]
-            return verb, target, f"{preposition} {second_target}"
+            return verb, target, preposition, second_target
+
+        # für normale Befehle: "[verb] [target]"
+        if len(words) == 2:
+            verb = words[0]
+            target = words[1]
+            return verb, target, None, None
+
+        # für Befehle zur Bewegung: "gehe zu [location]"
+        if len(words) == 3 and words[1] == "zu":
+            verb = words[0]
+            target = words[2]
+            return verb, target, None, None
+
+        # Dummy-Parser
         if len(words) == 3 and words[1] == "mit":
             verb = words[0]
             target = words[2]
-            return verb, target, None
+            return verb, target, None, None
 
-        return None, None, None
+        return None, None, None, None
 
-    def execute_command(self, verb, target, preposition):
+    def execute_command(self, verb, target, preposition, second_target):
         if verb == "hilfe":
-            print("Dies sind einige gültige Befehle: 'gehe zu [Ort]', 'untersuche [Ziel]', 'benutze [Objekt] mit [Ziel]', 'rede mit [Ziel]', 'speichern', 'laden', 'ende'.")
+            print("Dies sind einige gültige Befehle: 'gehe zu [Ort]', 'untersuche [Ziel]', 'benutze [Objekt] mit [Ziel]', 'benutze [Ziel]', 'nimm [Ziel]', 'rede mit [Ziel]', 'inventar', 'speichern', 'laden', 'ende'.")
 
         elif verb == "inventar":
             print(f"Dein Inventar enthält:\n {self.inventar_spieler}\n")
@@ -81,12 +88,11 @@ class Game:
             save_game("spielstand.json", self.current_location.__name__, self.inventar_spieler, self.player)
 
         elif verb == "laden":
-           location, inventory, name = load_game("spielstand.json", location_registry)
-           if location and inventory and name:
-               game.current_location = location
-               game.inventar_spieler = inventory
-               game.player = name
-               #game.current_location(game)
+            location, inventory, name = load_game("spielstand.json", self.locations)
+            if location and inventory and name:
+                self.current_location = location
+                self.inventar_spieler = inventory
+                self.player = name
 
         elif verb == "ende":
             ende = input("Möchtest du das Spiel wirklich beenden? (j/n) ").strip().lower()
@@ -99,7 +105,7 @@ class Game:
                 print("Eingabe nicht erkannt.\n")
 
         elif self.current_location:
-            self.current_location(self, verb, target, preposition)
+            self.current_location(self, verb, target, preposition, second_target)
 
         else:
             print("Das hat keinen Effekt.")
@@ -108,13 +114,12 @@ class Game:
         while True:
             self.current_location(self)
             command = input("Was möchtest du tun? ")
-            verb, target, preposition = self.parse_input(command)
+            verb, target, preposition, second_target = self.parse_input(command)
             if verb is not None:
-                self.execute_command(verb, target, preposition)
+                self.execute_command(verb, target, preposition, second_target)
             else:
                 print("Ungültiger Befehl.")
 
 if __name__ == "__main__":
     game = Game()
     game.play()
-
