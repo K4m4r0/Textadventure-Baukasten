@@ -33,17 +33,17 @@ class Game:
     def parse_input(self, user_input):
         words = user_input.lower().strip().split()
 
-        if "inventar" in words:
+        if "inventar" in words and len(words) == 1:  # and len(words) == 1 verhindert die versehentliche Nutzung in anderen Befehlen, wie zB "untersuche hilfe" oder "gehe zu laden"
             return "inventar", None, None, None
-        if "hilfe" in words:
+        if "hilfe" in words and len(words) == 1:
             return "hilfe", None, None, None
-        if "speichern" in words:
+        if "speichern" in words and len(words) == 1:
             return "speichern", None, None, None
-        if "laden" in words:
+        if "laden" in words and len(words) == 1:
             return "laden", None, None, None
-        if "ende" in words:
+        if "ende" in words and len(words) == 1:
             return "ende", None, None, None
-        if "name" in words:
+        if "name" in words and len(words) == 1:
             return "name", None, None, None
 
         # für Befehle wie: "benutze [object] mit [target]"
@@ -111,12 +111,19 @@ class Game:
             print("Das hat keinen Effekt.")
 
     def play(self):
+        last_location = None  # last_location verhindert die andauernde Ausgabe des "if verb is None:" Befehls in location.py
         while True:
-            self.current_location(self)
+            if self.current_location != last_location:
+                self.current_location(self)
+                last_location = self.current_location
+
             command = input("Was möchtest du tun? ")
             verb, target, preposition, second_target = self.parse_input(command)
             if verb is not None:
                 self.execute_command(verb, target, preposition, second_target)
+                # Variable wird beim Location-Wechsel zurückgesetzt
+                if self.current_location != last_location:
+                    last_location = None
             else:
                 print("Ungültiger Befehl.")
 
