@@ -25,6 +25,8 @@ def location_ebene(game, verb=None, target=None, preposition=None, second_target
         game.current_location = location_registry["location_wald"]
     elif verb == "gehe" and target == "tor" or target == "mauer":
         game.current_location = location_registry["tor"]
+    elif verb == "untersuche":
+        print("Du kannst nichts außergewöhnliches entdecken.")
     else:
         print("Das hat keinen Effekt.")
 
@@ -77,6 +79,8 @@ def location_wald(game, verb=None, target=None, preposition=None, second_target=
             print("Der Wald ist sehr dunkel.")
     elif verb == "untersuche" and target == "oger":
         print("Ein großer, grüner Oger, der unerwartet freundlich aussieht.")
+    elif verb == "untersuche":
+        print("Du kannst nichts außergewöhnliches entdecken.")
     else:
         print("Das hat keinen Effekt.")
 
@@ -92,6 +96,8 @@ def tor(game, verb=None, target=None, preposition=None, second_target=None):
         game.current_location = location_registry["location_ebene"]
     elif verb == "untersuche" and target == "tor":
             print("Ein großes, altes Tor. Es hat eine Öffnung für einen Schlüssel in der Mitte.")
+    elif verb == "untersuche":
+        print("Du kannst nichts außergewöhnliches entdecken.")
     else:
         print("Das hat keinen Effekt.")
 
