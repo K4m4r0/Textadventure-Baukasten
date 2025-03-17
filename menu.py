@@ -36,7 +36,7 @@ def menu(game, verb=None):
         elif auswahl == "3":
             print("Optionen:")
             print("Das Spiel wir durch Eingabe von Befehlen gesteuert.")
-            print("Dies sind einige gültige Befehle: \n"
+            print("Dies sind die gültigen Befehle: \n"
                   "'gehe zu [Ort]' - Bewege dich zum gewünschten Ort\n"
                   "'untersuche [Ziel]' - Untersuche das gewünschte Ziel\n"
                   "'benutze [Objekt] mit [Ziel]' - Benutze ein Objekt mit einem Ziel\n"
@@ -46,8 +46,9 @@ def menu(game, verb=None):
                   "'inventar' - Zeigt die Gegenstände in deinem Inventar an\n"
                   "'speichern' - Speichert das Spiel\n"
                   "'laden' - Lädt einen vorherigen Spielstand\n"
-                  "'ende' - Beendet das Spiel\n "
-                  "'hilfe' - Zeigt die Befehle im Spiel an")
+                  "'ende' - Beendet das Spiel\n"
+                  "'hilfe' - Zeigt die Befehle im Spiel an\n\n"
+                  "Für jedes [Ziel], [Objekt] und jeden [Ort] ist immer nur ein Wort einzugeben.")
         elif auswahl == "4":
             exit()
         else:
