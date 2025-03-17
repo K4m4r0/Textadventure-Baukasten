@@ -13,7 +13,7 @@ def menu(game, verb=None):
     print("/_/    \_\__,_| \_/ \___|_| |_|\__|\__,_|_|  \___| \n")
     print("\n")
     while True:
-        print("\nHerzlich willkommen bei Rapture. Was möchtest du tun?")
+        print("\nHerzlich willkommen bei Adventure. Was möchtest du tun?")
         print("1. Neues Spiel")
         print("2. Laden")
         print("3. Optionen")
