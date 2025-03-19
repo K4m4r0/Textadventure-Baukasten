@@ -95,14 +95,16 @@ class Game:
                 self.player = name
 
         elif verb == "ende":
-            ende = input("Möchtest du das Spiel wirklich beenden? (j/n) ").strip().lower()
-            if ende == "j":
-                print("Das Spiel wird beendet. Bis zum nächsten Mal!")
-                exit()  # Beendet das Programm
-            elif ende == "n":
-                print("Das Spiel wird fortgesetzt.\n")
-            else:
-                print("Eingabe nicht erkannt.\n")
+            while True:
+                ende = input("Möchtest du das Spiel wirklich beenden? Nicht gespeicherter Fortschritt geht verloren. (j/n) ").strip().lower()
+                if ende == "j":
+                    print("Das Spiel wird beendet. Bis zum nächsten Mal!")
+                    exit()  # Beendet das Programm
+                elif ende == "n":
+                    print("Das Spiel wird fortgesetzt.\n")
+                    break
+                else:
+                    print("Eingabe nicht erkannt.\n")
 
         elif self.current_location:
             self.current_location(self, verb, target, preposition, second_target)
