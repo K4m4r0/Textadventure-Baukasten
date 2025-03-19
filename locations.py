@@ -4,18 +4,18 @@ import inventar
 
 # ACHTUNG: ganz unten muss für jede neue Location ein Eintrag in der Location Registry vorgenommen werden!
 
-def start(game):
+def start(game): # Der Start des Spiels, kein wirklicher Ort. Hier kann eine Vorgeschichte erzählt werden.
         print("Du wachst auf, als eine Krähe anfängt gegen deinen Zeh zu picken.")
         print("Die Sonne scheint steil von oben auf dich herab. Es scheint wohl um die Mittagszeit zu sein.")
         print("Du kannst dich an nichts erinnern. Was ist in der letzten Nacht passiert? Nur ein blaues Licht scheint dir als Erinnerung geblieben zu sein.")
         print("Als du in deine Tasche greifst, ziehst du einen Ausweis heraus.")
         game.player = input("Du siehst auf das Foto und erkennst dein Gesicht. Daneben steht dein Name: ")
         print(f"Du denkst dir nur 'Guten Morgen, {game.player}' und siehst dich weiter um.\n")
-        ausweis = inventar.Item("Personalausweis", "Dein Personalausweis mit einem Foto.")
-        game.inventar_spieler.add_item(ausweis)
+        ausweis = inventar.Item("Personalausweis", "Dein Personalausweis mit einem Foto.") # Erstellt den Gegenstand "Personalausweis" mit Beschreibung
+        game.inventar_spieler.add_item(ausweis) # Fügt den erstellten Gegenstand dem Inventar des Spielers hinzu
 
-        game.current_location = location_registry["location_wald"]
-        print("Du bist in einem düsteren Wald. Hinter dir ist eine strahlende Ebene. Am Eingang zum Wald steht ein Oger.")
+        game.current_location = location_registry["location_wald"] # Der Wechsel vom Start des Spiels zum ersten Ort.
+        print("Du bist in einem düsteren Wald. Hinter dir ist eine strahlende Ebene. Am Eingang zum Wald steht ein Oger.") # Der Text des ersten Ortes muss auch hier ausgegeben werden, da er sonst nicht angezeigt wird.
 
 
 def location_ebene(game, verb=None, target=None, preposition=None, second_target=None):
@@ -23,7 +23,7 @@ def location_ebene(game, verb=None, target=None, preposition=None, second_target
         print("Du befindest dich in einer weiten Ebene. Vor dir ist ein Wald. Rechts neben dir ist eine Mauer mit einem Tor.")
     elif verb == "gehe" and target == "wald":
         game.current_location = location_registry["location_wald"]
-    elif verb == "gehe" and target == "tor" or target == "mauer":
+    elif verb == "gehe" and target in ["tor", "mauer"]:
         game.current_location = location_registry["tor"]
     elif verb == "untersuche":
         print("Du kannst nichts außergewöhnliches entdecken.")
