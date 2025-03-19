@@ -46,7 +46,7 @@ class Game:
         if "name" in words and len(words) == 1:
             return "name", None, None, None
 
-        # für Befehle wie: "benutze [object] mit [target]"
+        # für Befehle wie: "benutze [Objekt] mit [Ziel]"
         if len(words) == 4 and words[2] == "mit":
             verb = words[0]
             target = words[1]
@@ -54,19 +54,25 @@ class Game:
             second_target = words[3]
             return verb, target, preposition, second_target
 
-        # für normale Befehle: "[verb] [target]"
+        # für normale Befehle: "[Verb] [Ziel]"
         if len(words) == 2:
             verb = words[0]
             target = words[1]
             return verb, target, None, None
 
-        # für Befehle zur Bewegung: "gehe zu [location]"
+        # für Befehle zur Bewegung: "gehe zu [Ort]"
         if len(words) == 3 and words[1] == "zu":
             verb = words[0]
             target = words[2]
             return verb, target, None, None
 
-        # Dummy-Parser
+        # diverse Befehle mit zB benutze der/die/das/den [Objekt]
+        if len(words) == 3 and words[1] in ["die", "der", "das", "den"]:
+            verb = words[0]
+            target = words[2]
+            return verb, target, None, None
+        
+        # Dummy-Parser zum testen
         if len(words) == 3 and words[1] == "mit":
             verb = words[0]
             target = words[2]
